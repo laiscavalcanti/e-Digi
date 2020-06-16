@@ -1,4 +1,4 @@
-import { mailFormat, valueNotEmpty } from "./validate.js";
+import { mailFormat, isEmpty } from "../validate.js";
 
 export default class Author {
   constructor(name, email) {
@@ -8,13 +8,12 @@ export default class Author {
   }
 
   setName(name) {
-    if (!valueNotEmpty(name))
-      throw new Error(`O campo nome precisa ser preenchido`);
+    if (isEmpty(name)) throw new Error(`O campo nome precisa ser preenchido`);
     this._name = name;
   }
 
   setEmail(email) {
-    if (!valueNotEmpty(email) || !email.match(mailFormat))
+    if (isEmpty(email) || !email.match(mailFormat))
       throw new Error(
         `O campo email precisa ser preenchido com um formato válido`
       );
