@@ -1,6 +1,6 @@
 import Author from "../models/Author.js";
 
-export default class AuthorDAOr {
+export default class AuthorDAO {
   constructor() {
     this._list = [];
   }
@@ -9,16 +9,15 @@ export default class AuthorDAOr {
     const emailAuthor = this._list.find(
       (emailAuthor) => emailAuthor.email === email
     );
-    return emailAuthor;
+    if (emailAuthor instanceof Author) return emailAuthor;
   }
   add(emailAuthor) {
     const duplicateEmail = this.uniqueEmail(emailAuthor.email);
-    if (duplicateEmail instanceof Author) {
+    if (duplicateEmail) {
       throw new Error(`email já cadastrado`);
     }
     this._list.push(emailAuthor);
 
     console.log(this._list);
-    console.log(emailAuthor instanceof Author);
   }
 }
