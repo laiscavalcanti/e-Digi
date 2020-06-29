@@ -4,7 +4,6 @@ export default class Author {
   constructor(name, email) {
     this.setName(name);
     this.setEmail(email);
-    this._date = new Date();
   }
 
   setName(name) {

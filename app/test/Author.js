@@ -27,7 +27,7 @@ try {
 //validação de campo vazio para nome
 try {
   const authorDAO = new AuthorDAO();
-  const author2 = new Author("Ana", "rana@gmail.com");
+  const author2 = new Author(" ", "pedro@gmail.com");
   authorDAO.add(author2);
   console.log(`salvou ${author2.name} ${author2.email}`);
 } catch (error) {

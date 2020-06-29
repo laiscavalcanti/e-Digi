@@ -5,18 +5,16 @@ export default class AuthorDAO {
     this._list = [];
   }
 
-  uniqueEmail(email) {
-    const emailAuthor = this._list.find(
-      (emailAuthor) => emailAuthor.email === email
-    );
-    if (emailAuthor instanceof Author) return emailAuthor;
+  findEmail(email) {
+    const author = this._list.find((author) => author.email === email);
+    if (author instanceof Author) return author;
   }
-  add(emailAuthor) {
-    const duplicateEmail = this.uniqueEmail(emailAuthor.email);
-    if (duplicateEmail) {
+  add(author) {
+    const hasAuthor = this.findEmail(author.email);
+    if (hasAuthor) {
       throw new Error(`email já cadastrado`);
     }
-    this._list.push(emailAuthor);
+    this._list.push(author);
 
     console.log(this._list);
   }
