@@ -1,0 +1,14 @@
+{
+  "name": "e-digi",
+  "version": "1.0.0",
+  "description": "Projeto E-digi",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
