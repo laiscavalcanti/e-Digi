@@ -12,6 +12,5 @@ export default class CategoryDAO {
     if (this._list.some((c) => c.name === category.name)) {
       throw new Error("A categoria já foi cadastrada");
     }
-    this._list.push(category);
   }
 }
