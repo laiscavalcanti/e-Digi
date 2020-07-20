@@ -13,5 +13,6 @@ export default class AuthorDAO {
     if (this._list.some((a) => a.email === author.email)) {
       throw new Error("O author já existe");
     }
+    this._list.push(author)
   }
 }
