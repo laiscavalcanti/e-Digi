@@ -2,7 +2,7 @@ import Author from "../models/Author.js";
 import Category from "../models/Category.js";
 import Book from "../models/Book.js";
 
-//title, resume, summary, numberPages, isbn, author, category,  price
+//title, resume, summary, numberPages, isbn, author, category, price
 
 try {
   const author = new Author("Ana", "ana@gmail.com");
@@ -11,11 +11,12 @@ try {
     "Design UX/UI",
     "Esse livro é sobre Design UX/UI",
     "Sumário",
-    50,
-    "978-85-08-13196-9",
+    40,
+    "978-85-13196-08-9",
     author,
     category,
-    50
+    -2,
+    12
   );
   console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
      ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}`);

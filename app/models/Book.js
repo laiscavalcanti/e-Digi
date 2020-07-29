@@ -3,7 +3,7 @@ import Category from './Category.js';
 import { isEmpty, isNull, maxLength, isbnFormat, isBiggerThan } from "../validate.js";
 
 export default class Book{
-    constructor(title, resume, summary, numberPages, isbn, author, category, edition, price){
+    constructor(title, resume, summary, numberPages, isbn, author, category, price, edition){
         this.title = title;
         this.resume = resume;
         this.summary = summary;
@@ -11,8 +11,8 @@ export default class Book{
         this.isbn = isbn;
         this.author = author;
         this.category = category;
-        this.edition = edition;
         this.price = price;
+        this.edition = edition;
     }
 
     set title(title){
@@ -21,8 +21,8 @@ export default class Book{
       this._title = title;
     }
     set resume(resume){
-        const validLength = maxLength(10)
-        if(validLength(resume))
+        const validLength = maxLength(40)
+        if(!validLength(resume))
             throw new Error(`O resumo precisa ter mais que 500 caracteres`);
         if(isNull(resume) || isEmpty(resume)) 
             throw new Error(`O campo resumo não pode ser vazio`);
@@ -54,10 +54,15 @@ export default class Book{
             this._category = category;
     }
     set price(price){
-        const validPrice = isBiggerThan(10);
-        if(validPrice(price))
-            throw new Error(`O preço mínimo de um livro deve ser de 10 reais.`)
+        const isValidPrice = maxLength(1);
+        if(isValidPrice(price))
+            throw new Error(`O campo preço precisa recebr valores maiores que 0`)
         this._price = price;
+    }
+
+    set edition(edition){
+        if(isEmpty(edition) || isNull(edition))
+            throw new Error(`O campo edição não pode ser vazio`)
     }
     get price(){
         return this._price;
