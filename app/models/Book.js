@@ -1,6 +1,6 @@
 import Author from './Author.js';
 import Category from './Category.js';
-import { isEmpty, isNull, maxLength, isbnFormat, isBiggerThan } from "../validate.js";
+import { isEmpty, isNull, maxLength, isbnFormat, editionFormat } from "../validate.js";
 
 export default class Book{
     constructor(title, resume, summary, numberPages, isbn, author, category, price, edition){
@@ -34,8 +34,8 @@ export default class Book{
         this._summary = summary;
     }
     set numberPages(numberPages){
-        if(numberPages <= 0)
-            throw new Error(`O campo número de páginas precisa recebr valores maiores que 0`)
+        if(numberPages < 0)
+            throw new Error(`O campo número de páginas precisa recebr valores maiores que 0`);
         this._numberPages = numberPages;
     }
     set isbn(isbn){
@@ -46,23 +46,26 @@ export default class Book{
       this._isbn = isbn;
     }
     set author(author){
-        if(author instanceof Author)
+        if(author instanceof Author);
         this._author = author;
     }
     set category(category){
-        if(category instanceof Category)
-            this._category = category;
+        if(category instanceof Category);
+        this._category = category;
     }
     set price(price){
-        const isValidPrice = maxLength(1);
-        if(isValidPrice(price))
-            throw new Error(`O campo preço precisa recebr valores maiores que 0`)
+        if(price <= 0)
+            throw new Error(`O campo preço precisa receber valores positivos`)
         this._price = price;
     }
 
     set edition(edition){
-        if(isEmpty(edition) || isNull(edition))
-            throw new Error(`O campo edição não pode ser vazio`)
+        if( isNull(edition) || !edition.match(editionFormat))
+            throw new Error(`O campo edição precisa começar com o número 1`);
+        this._edition = edition;
+    }
+    get edition(){
+        return this._edition;
     }
     get price(){
         return this._price;

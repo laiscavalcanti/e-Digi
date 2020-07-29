@@ -1,6 +1,8 @@
-export const mailFormat = /^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$/g;
+export const emailFormat = /^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$/g;
 
 export const isbnFormat = /978(?:-?\d){10}/g;
+
+export const editionFormat = /^1[0-9].*$/g;
 
 export const notEmpty = (value) => (value === " " ? false : true);
 
@@ -10,5 +12,5 @@ export const isNull = (value) => value === null;
 
 export const maxLength = (length) => (value) => value.length < length;
 
-export const isBiggerThan = (filter) => (value) => value >= filter;
+
 
