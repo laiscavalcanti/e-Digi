@@ -1,17 +1,16 @@
-export default class ValidateErrors{
-    constructor(){
-        this._errors = [];
-    }
-   
-    addError(error){
-        this._errors.push(error);
-    }
+export default class ValidateErrors {
+    _errors = [];
+  
 
-    hasErrors(){
-        return this._errors.length > 0;
-    }
+  addError(error) {
+    this._errors.push(error);
+  }
 
-    get errors(){
-        return this._errors;
-    }
+  hasErrors() {
+    return this._errors.length > 0;
+  }
+
+  get errors() {
+    return this._errors;
+  }
 }

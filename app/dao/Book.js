@@ -5,22 +5,22 @@ export default class BookDAO {
   constructor() {
     this._list = [];
   }
-  someTitle(book) {
+  findTitle(book) {
     return this._list.some((b) => b.title === book.title);
   }
-  someIsbn(book) {
+  findIsbn(book) {
     return this._list.some((i) => i.isbn === book.isbn);
   }
 
   validationBook(book) {
     const validate = new ValidateErrors();
 
-    if (this.someTitle(book)) {
+    if (this.findTitle(book)) {
       validate.addError(
         new Error(`Já existe um cadastro de livro com esse título!`)
       );
     }
-    if (this.someIsbn(book)) {
+    if (this.findIsbn(book)) {
       validate.addError(
         new Error(`Já existe um livro cadastrado com esse ISBN!`)
       );
@@ -35,13 +35,10 @@ export default class BookDAO {
       throw new Error(`O Objeto não é do tipo Livro`);
     }
     if (validatedBook.hasErrors()) {
-        return validatedBook.errors.forEach((error) => {
-            throw error;
-          });
-      }
-  
-      this._list.push(book);
+      throw validatedBook.errors;
+    }
+
+    this._list.push(book);
     //console.log(this._list);
   }
-  
 }
