@@ -1,6 +1,5 @@
-export default class ValidateErrors {
+export default class ValidateErrors{
     constructor(){
-   
         this._errors = [];
     }
    
