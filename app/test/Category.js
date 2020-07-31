@@ -11,16 +11,16 @@ try {
   console.log(`saved ${category1.name}`);
   console.log(`saved ${category2.name}`);
 } catch (err) {
-  console.log(`WRG ${err}`);
+  console.log(`${err}`);
 }
 
 // teste para campo vazio
 
 try {
   const categoryDAO = new CategoryDAO();
-  const category1 = new Category("Oi");
+  const category1 = new Category("Devops");
   categoryDAO.add(category1);
   console.log(`saved ${(category1.name = " ")}`);
 } catch (err) {
-  console.log(`WRG ${err}`);
+  console.log(`${err}`);
 }
