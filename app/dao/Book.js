@@ -1,21 +1,47 @@
-import Book from '../models/Book.js';
+import Book from "../models/Book.js";
+import ValidateErrors from "../validateErrors.js";
 
-export default class BookDAO{
-    constructor(){
-        this._list = [];
+export default class BookDAO {
+  constructor() {
+    this._list = [];
+  }
+  someTitle(book) {
+    return this._list.some((b) => b.title === book.title);
+  }
+  someIsbn(book) {
+    return this._list.some((i) => i.isbn === book.isbn);
+  }
+
+  validationBook(book) {
+    const validate = new ValidateErrors();
+
+    if (this.someTitle(book)) {
+      validate.addError(
+        new Error(`Já existe um cadastro de livro com esse título!`)
+      );
     }
-      
-    add(book){
-        if(!(book instanceof Book)){
-            throw new Error (`O objeto não é do tipo Livro`);
-        }
-
-        if(this._list.some((b) => b.title === book.title)){
-            throw new Error(`O livro já existe`);
-        }
-        this._list.push(book);
-        console.log(this._list)
+    if (this.someIsbn(book)) {
+      validate.addError(
+        new Error(`Já existe um livro cadastrado com esse ISBN!`)
+      );
     }
 
+    return validate;
+  }
 
+  add(book) {
+    const validatedBook = this.validationBook(book);
+    if (!(book instanceof Book)) {
+      throw new Error(`O Objeto não é do tipo Livro`);
+    }
+    if (validatedBook.hasErrors()) {
+        return validatedBook.errors.forEach((error) => {
+            throw error;
+          });
+      }
+  
+      this._list.push(book);
+    //console.log(this._list);
+  }
+  
 }
