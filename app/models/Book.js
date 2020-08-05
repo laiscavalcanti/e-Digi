@@ -21,11 +21,11 @@ export default class Book{
       this._title = title;
     }
     set resume(resume){
-        const validLength = maxLength(40)
-        if(!validLength(resume))
-            throw new Error(`O resumo precisa ter mais que 500 caracteres`);
+        const validLength = maxLength(40);
         if(isNull(resume) || isEmpty(resume)) 
             throw new Error(`O campo resumo não pode ser vazio`);
+        if(!validLength(resume))
+            throw new Error(`O resumo precisa ter mais que 500 caracteres`);
         this._resume = resume;
     }
     set summary(summary){
@@ -46,11 +46,15 @@ export default class Book{
       this._isbn = isbn;
     }
     set author(author){
-        if(author instanceof Author);
+        if(!(author instanceof Author)){
+            throw new Error(`O objeto não é do tipo autor`);
+        }
         this._author = author;
     }
     set category(category){
-        if(category instanceof Category);
+        if(!(category instanceof Category)){
+            throw new Error(`O objeto não é do tipo categoria`);
+        }
         this._category = category;
     }
     set price(price){
@@ -64,6 +68,7 @@ export default class Book{
             throw new Error(`O campo edição precisa começar com o número 1`);
         this._edition = edition;
     }
+
     get edition(){
         return this._edition;
     }

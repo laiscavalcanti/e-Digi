@@ -1,6 +1,5 @@
 export default class ValidateErrors {
-    _errors = [];
-  
+  _errors = [];
 
   addError(error) {
     this._errors.push(error);
