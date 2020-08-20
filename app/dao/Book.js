@@ -1,4 +1,5 @@
 import Book from "../models/Book.js";
+import {isEmpty, maxLength} from '../validate.js'
 import ValidateErrors from "../validateErrors.js";
 
 export default class BookDAO {
@@ -31,6 +32,18 @@ export default class BookDAO {
     return validate;
   }
 
+  render(title){
+    const book = this.hasTitle(title);
+
+    /*if(isEmpty(title) || title < maxLength(2)){
+        throw new Error ("A busca do livro precisa ter no minimo 2 letras")
+    }*/
+    if(!book){
+      throw new Error ("Não foi encontrado");
+  }
+    return book.toView();
+}
+
   add(book) {
     const validatedBook = this.validationBook(book);
     if (validatedBook.hasErrors()) {
@@ -38,6 +51,5 @@ export default class BookDAO {
     }
 
     this._list.push(book);
-    //console.log(this._list);
   }
 }
