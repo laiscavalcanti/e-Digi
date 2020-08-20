@@ -100,11 +100,14 @@ export default class Book{
     toView(){
         return `
             Título: ${this._title}\n
-            Autor: ${this._author}\n
-            Preço: ${this._price}\n
-            Sumário: ${this._summary}\n
             Resumo: ${this._resume}\n
+            Sumário: ${this._summary}\n
             Número de Páginas: ${this._numberPages}\n
+            ISBN: ${this._isbn}
+            Autor: ${this._author}\n
+            Categoria: ${this._category}\n
+            Preço: ${this._price}\n
+            Edição: ${this._edition}\n
         `
     }
 }

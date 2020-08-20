@@ -1,4 +1,4 @@
-//import BookView from '../dao/BookView.js'
+import BookView from '../view/BookView.js'
 import BookDAO from '../dao/Book.js'
 import Book from '../models/Book.js'
 import Author from "../models/Author.js";
@@ -20,15 +20,8 @@ try{
         '12'
       );
       bookDAO.add(book);
-      bookDAO.render("Design UX/UI");
-
-      console.log({
-        list: bookDAO._list
-      });
-     
+      console.log({book});
+      new BookView("Design").render();    
 } catch(err){
-  
-    console.log(err)
-  
-    
+    console.log(err);
 }
