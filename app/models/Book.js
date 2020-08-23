@@ -97,15 +97,15 @@ export default class Book{
         return this._title;
     }
 
-    toView(){
+    toString(){
         return `
             Título: ${this._title}\n
             Resumo: ${this._resume}\n
             Sumário: ${this._summary}\n
             Número de Páginas: ${this._numberPages}\n
             ISBN: ${this._isbn}
-            Autor: ${this._author}\n
-            Categoria: ${this._category}\n
+            Autor: ${this._author.name}\n
+            Categoria: ${this._category.name}\n
             Preço: ${this._price}\n
             Edição: ${this._edition}\n
         `

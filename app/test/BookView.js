@@ -1,4 +1,3 @@
-import BookView from '../view/BookView.js'
 import BookDAO from '../dao/Book.js'
 import Book from '../models/Book.js'
 import Author from "../models/Author.js";
@@ -12,16 +11,37 @@ try{
         "Design UX/UI",
         "Esse livro é sobre Design UX/UI",
         "Sumário",
-        40,
-        "978-85-13196-08-9",
+        150,
+        "978-85-13176-08-9",
         author,
         category,
-        2,
+        40,
         '12'
       );
+
+      ////////////////////////////////////////
+
+      const book2 = new Book(
+        "Design Patterns",
+        "Um livro sobre padrões de código",
+        "Sumário",
+        40,
+        "978-85-13276-08-9",
+        author,
+        category,
+        45,
+        '12'
+      );
+ 
       bookDAO.add(book);
+      bookDAO.add(book2);
       console.log({book});
-      new BookView("Design").render();    
+      console.log("Resultado da busca");
+      const result = bookDAO.search("Design");
+      result.forEach(book => {
+          console.log(book.toString())
+      });
+        
 } catch(err){
     console.log(err);
 }

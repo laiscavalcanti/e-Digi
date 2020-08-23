@@ -32,16 +32,16 @@ export default class BookDAO {
     return validate;
   }
 
-  render(title){
-    const book = this.hasTitle(title);
-
-    /*if(isEmpty(title) || title < maxLength(2)){
+  search(title){
+    if(isEmpty(title) || title < maxLength(2)){
         throw new Error ("A busca do livro precisa ter no minimo 2 letras")
-    }*/
-    if(!book){
+    }
+
+    const books = this._list.filter(e => e.title.includes(title));
+    if(books.length < 1){
       throw new Error ("Não foi encontrado");
   }
-    return book.toView();
+    return books;
 }
 
   add(book) {
@@ -49,7 +49,6 @@ export default class BookDAO {
     if (validatedBook.hasErrors()) {
       throw validatedBook.errors;
     }
-
     this._list.push(book);
   }
 }
