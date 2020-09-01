@@ -21,7 +21,7 @@ export default class Book{
       this._title = title;
     }
     set resume(resume){
-        const validLength = maxLength(500);
+        const validLength = maxLength(50);
         if(isNull(resume) || isEmpty(resume)) 
             throw new Error(`O campo resumo não pode ser vazio`);
         if(!validLength(resume))
@@ -95,5 +95,19 @@ export default class Book{
     }*/
     get title(){
         return this._title;
+    }
+
+    toString(){
+        return `
+            Título: ${this._title}\n
+            Resumo: ${this._resume}\n
+            Sumário: ${this._summary}\n
+            Número de Páginas: ${this._numberPages}\n
+            ISBN: ${this._isbn}
+            Autor: ${this._author.name}\n
+            Categoria: ${this._category.name}\n
+            Preço: ${this._price}\n
+            Edição: ${this._edition}\n
+        `
     }
 }
