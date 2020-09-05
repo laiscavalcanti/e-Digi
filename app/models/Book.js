@@ -69,7 +69,7 @@ export default class Book{
         this._edition = edition;
     }
 
-   /* get edition(){
+    get edition(){
         return this._edition;
     }
     get price(){
@@ -80,11 +80,11 @@ export default class Book{
     }
     get category(){
         return this._category;
-    }*/
+    }
     get isbn(){
         return this._isbn; 
     }
-    /*get numberPages(){
+    get numberPages(){
         return this._numberPages;
     }
     get summary(){
@@ -92,7 +92,7 @@ export default class Book{
     }
     get resume(){
         return this._resume;
-    }*/
+    }
     get title(){
         return this._title;
     }
