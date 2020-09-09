@@ -6,9 +6,9 @@ export default class Cart{
         this.addItem(item);
     }
     addItem(item){
-        /*if(!(item instanceof CartItem)){
+        if(!(item instanceof CartItem)){
             throw new Error('O item não é do tipo CartItem');
-        }*/
+        }
        this._list.push(item);
     }
     total(){
