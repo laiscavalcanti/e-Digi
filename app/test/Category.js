@@ -1,6 +1,23 @@
 import Category from "../models/Category.js";
 import CategoryDAO from "../dao/Category.js";
 
+
+try {
+  const category = undefined;
+  const book = new CategoryDAO();
+  book.add(category);
+} catch (err) {
+  console.log(err);
+}
+
+try {
+  const category = null;
+  const book= new CategoryDAO();
+  book.add(category);
+} catch (err) {
+  console.log(err);
+}
+
 //teste para categoria repetida
 try {
   const categoryDAO = new CategoryDAO();

@@ -5,6 +5,23 @@ import BookDAO from "../dao/Book.js"
 
 //title, resume, summary, numberPages, isbn, author, category, price, edition
 
+try {
+  const book = undefined;
+  const bookDAO = new BookDAO();
+  bookDAO.add(book);
+} catch (err) {
+  console.log(err);
+}
+
+try {
+  const book = null;
+  const bookDAO = new BookDAO();
+  bookDAO.add(book);
+} catch (err) {
+  console.log(err);
+}
+
+
 // teste para nome de livros e isbn igauis ao mesmo tempo
 try {
   const bookDAO = new BookDAO();

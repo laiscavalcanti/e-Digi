@@ -5,7 +5,6 @@ export default class CartDAO{
         this._cart = [];
     }
     add(cart){
-
         if(!(cart instanceof Cart)){
             throw new Error ("O objeto não é do tipo Carrinho de Compras");
         }

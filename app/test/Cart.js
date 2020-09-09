@@ -5,6 +5,22 @@ import Cart from "../models/Cart.js";
 import CartItem from "../models/CartItem.js";
 import CartDAO from "../dao/Cart.js";
 
+try {
+  const cart = undefined;
+  const cartDAO = new CartDAO();
+  cartDAO.add(cart);
+} catch (err) {
+  console.log(err);
+}
+
+try {
+  const cart = null;
+  const cartDAO = new CartDAO();
+  cartDAO.add(cart);
+} catch (err) {
+  console.log(err);
+}
+
 try{
     const cartDAO = new CartDAO();
     const author = new Author("Ana", "ana@gmail.com");

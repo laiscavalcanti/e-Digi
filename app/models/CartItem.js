@@ -7,12 +7,9 @@ export default class CartItem{
         this.quantify = quantify;
     }
     set book(book){
-        if(!(book instanceof Book)){
+        /*if(!(book instanceof Book)){
             throw new Error('O objeto não é do tipo livro');
-        }
-        if(book == null){
-            throw new Error('O livro não pode ser nulo');
-        }
+        }*/   
         this._book = book;
     }
     set quantify(quantify){
