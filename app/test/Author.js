@@ -1,6 +1,22 @@
 import Author from "../models/Author.js";
 import AuthorDAO from "../dao/Author.js";
 
+try {
+  const author = undefined;
+  const authorDAO = new AuthorDAO();
+  authorDAO.add(author);
+} catch (err) {
+  console.log(err);
+}
+
+try {
+  const author = null;
+  const authorDAO = new AuthorDAO();
+  authorDAO.add(author);
+} catch (err) {
+  console.log(err);
+}
+
 //validação de email igual
 try {
   const authorDAO = new AuthorDAO();
