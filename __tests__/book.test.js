@@ -69,4 +69,233 @@ describe("Teste para classe livro", () => {
       expect(err.message).toMatch("O ISBN e o Título já foram cadastrados!");
     }
   });
+  it("O titulo não pode ser vazio", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        " ",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-13196-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O campo do titulo está vazio");
+    }
+  });
+  it("O resumo precisa ter ao menos 500 caracteres", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI Esse livro é sobre Design UX/UI Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-13196-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+    
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O sumário não tem a quantidade de caracteres exigido");
+    }
+  });
+  it("O sumário não pode ser vazio ", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        " ",
+        40,
+        "978-85-13196-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("");
+    }
+  });
+  it("O número de páginas dever ser maior que 1", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        -2,
+        "978-85-13196-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O número de páginas é menor que 1");
+    }
+  });
+  it("O ISBN precisa estar no formato correto", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "9-85-136-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+    
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O ISBN não está no formato correto");
+    }
+    
+  });
+
+  it("O autor não pode ser vazio", () => {
+    try {
+      const author = new Author(" ", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-18236-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O campo autor está vazio");
+    }
+  });
+
+  it("O email precisa de um email válido", () => {
+    try {
+      const author = new Author("Ana", "anagmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-18236-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O email do autor está incorreto");
+    }
+  });
+
+  it("Categoria não pode ser vazia", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category(" ");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-18236-08-9",
+        author,
+        category,
+        2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("A categoria está com campo vazio");
+    }
+  });
+
+  it("O preço não pode ser negativo", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-18236-08-9",
+        author,
+        category,
+        -2,
+        '12'
+      );
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O preço está com valor negativo");
+    }
+  });
+
+  it("O número da edição precisa começar com número 1", () => {
+    try {
+      const author = new Author("Ana", "ana@gmail.com");
+      const category = new Category("Design");
+      const newBook = new Book(
+        "Design UX/UI",
+        "Esse livro é sobre Design UX/UI",
+        "Sumário",
+        40,
+        "978-85-18236-08-9",
+        author,
+        category,
+        2,
+        '21'
+      );
+    
+      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
+         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
+         ${newBook.edition}`);
+    } catch (err) {
+      expect(err.message).toMatch("O número da edição não começa com o número 1");
+    }  
+  });
 });

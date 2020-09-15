@@ -23,7 +23,7 @@ describe("Testes para classe Categoria", () => {
         expect(err.message).toMatch("Para criação da categoria o valor não pode ser");
       }
   })
-  it("Categoria com nome vazio não pode ser criado", () => {
+  it("Categoria com nome vazio não pode ser criada", () => {
     try {
       new Category(" ");
     } catch (error) {
@@ -31,16 +31,16 @@ describe("Testes para classe Categoria", () => {
     }
   });
 
-  it("Categorias iguais não podem ser criadas", () => {
+  it("Categorias iguais não podem ser cadastradas", () => {
     try {
-      const categoria = new Category("Devops");
+      const category = new Category("Devops");
       const categoryDAO = new CategoryDAO();
-      categoryDAO.add(categoria);
-      const categoriaRepetida = new Category("Devops");
-      categoryDAO.add(categoriaRepetida);
-    } catch (error) {
-      expect(error.message).toMatch(
-        "Uma categoria com esse nome já foi cadastrada!!"
+      categoryDAO.add(category);
+      const categoria2 = new Category("Devops");
+      categoryDAO.add(categoria2);
+    } catch (err) {
+      expect(err.message).toMatch(
+        "Uma categoria com esse nome já foi cadastrada!"
       );
     }
   });
