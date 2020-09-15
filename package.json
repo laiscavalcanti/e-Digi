@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Projeto E-digi",
   "author": "",
+ 
   "license": "ISC",
   "dependencies": {
     "nodemon": "^2.0.4"
