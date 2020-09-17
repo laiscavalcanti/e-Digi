@@ -8,10 +8,8 @@ describe("Testes para classe Categoria", () => {
       const categoryDAO = new CategoryDAO();
       categoryDAO.add(category);
     } catch (err) {
-      expect(err.message).toMatch(
-        "Para criação da categoria precisa ser do tipo Category"
-      );
-    }
+      expect(err.message);
+        }
   });
 
   it("Categoria não pode ser nula", () => {
@@ -20,14 +18,14 @@ describe("Testes para classe Categoria", () => {
         const categoryDAO = new CategoryDAO();
         categoryDAO.add(category);
       } catch (err) {
-        expect(err.message).toMatch("Para criação da categoria o valor não pode ser");
+        expect(err.message);
       }
   })
   it("Categoria com nome vazio não pode ser criada", () => {
     try {
       new Category(" ");
     } catch (error) {
-      expect(error.message).toMatch("O campo Categoria deve ser preenchido!");
+      expect(error.message);
     }
   });
 
@@ -39,9 +37,7 @@ describe("Testes para classe Categoria", () => {
       const categoria2 = new Category("Devops");
       categoryDAO.add(categoria2);
     } catch (err) {
-      expect(err.message).toMatch(
-        "Uma categoria com esse nome já foi cadastrada!"
-      );
+      expect(err.message)
     }
   });
 });

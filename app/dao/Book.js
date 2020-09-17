@@ -29,7 +29,7 @@ export default class BookDAO {
   }
 
   search(title) {
-    if (isEmpty(title) || title < maxLength(1)) {
+    if (isEmpty(title) ) {
       throw new Error("A busca do livro precisa ter no minimo 2 letras")
     }
 

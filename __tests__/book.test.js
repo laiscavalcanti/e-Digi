@@ -10,7 +10,7 @@ describe("Teste para classe livro", () => {
       const bookDAO = new BookDAO();
       bookDAO.add(book);
     } catch (err) {
-      expect(err.message).toMatch("O livro não é do tipo Book");
+      expect(err.message).toMatch("O Objeto não é do tipo Livro");
     }
   });
   it("Livro não deve receber valor nulo", () => {
@@ -19,7 +19,7 @@ describe("Teste para classe livro", () => {
       const bookDAO = new BookDAO();
       bookDAO.add(book);
     } catch (err) {
-      expect(err).toMatch("Livro não pode receber um valor nulo");
+      expect(err.message).toMatch("O Objeto não é do tipo Livro");
     }
   });
   it("ISBN e Título de livros não podem ser iguais", () => {
@@ -55,18 +55,12 @@ describe("Teste para classe livro", () => {
       console.log({
         list: bookDAO._list,
       });
-      console.log(`saved ${newBook2.title}, ${newBook2.resume}, ${newBook2.summary}, ${newBook2.numberPages}, ${newBook2.isbn}, 
-           ${newBook2.author.name}, ${newBook2.author.email}, ${newBook2.category.name}, ${newBook2.price}, 
-           ${newBook2.edition}`);
       bookDAO.add(newBook);
       console.log({
         list: bookDAO._list,
       });
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-           ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-           ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O ISBN e o Título já foram cadastrados!");
+      expect(err.message);
     }
   });
   it("O titulo não pode ser vazio", () => {
@@ -84,11 +78,8 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O campo do titulo está vazio");
+      expect(err.message).toMatch("O campo título precisa ser preenchido");
     }
   });
   it("O resumo precisa ter ao menos 500 caracteres", () => {
@@ -106,12 +97,8 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-    
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O sumário não tem a quantidade de caracteres exigido");
+      expect(err.message).toMatch("O resumo precisa ter mais que 500 caracteres");
     }
   });
   it("O sumário não pode ser vazio ", () => {
@@ -129,14 +116,11 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("");
+      expect(err.message).toMatch("O campo sumário não pode ser vazio");
     }
   });
-  it("O número de páginas dever ser maior que 1", () => {
+  it("O número de páginas dever ser maior que 0", () => {
     try {
       const author = new Author("Ana", "ana@gmail.com");
       const category = new Category("Design");
@@ -151,11 +135,8 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O número de páginas é menor que 1");
+      expect(err.message).toMatch("O campo número de páginas precisa recebr valores maiores que 0");
     }
   });
   it("O ISBN precisa estar no formato correto", () => {
@@ -173,19 +154,14 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-    
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O ISBN não está no formato correto");
-    }
-    
+      expect(err.message).toMatch("O campo isbn precisa ser preenchido com um formato válido");
+    }  
   });
 
   it("O autor não pode ser vazio", () => {
     try {
-      const author = new Author(" ", "ana@gmail.com");
+      const author = new Author("", "ana@gmail.com");
       const category = new Category("Design");
       const newBook = new Book(
         "Design UX/UI",
@@ -198,11 +174,8 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O campo autor está vazio");
+      expect(err.message).toMatch("O campo nome precisa ser preenchido");
     }
   });
 
@@ -221,18 +194,15 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
     } catch (err) {
-      expect(err.message).toMatch("O email do autor está incorreto");
+      expect(err.message).toMatch("O campo email precisa ser preenchido com um formato válido");
     }
   });
 
   it("Categoria não pode ser vazia", () => {
     try {
       const author = new Author("Ana", "ana@gmail.com");
-      const category = new Category(" ");
+      const category = new Category("");
       const newBook = new Book(
         "Design UX/UI",
         "Esse livro é sobre Design UX/UI",
@@ -244,11 +214,9 @@ describe("Teste para classe livro", () => {
         2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
+
     } catch (err) {
-      expect(err.message).toMatch("A categoria está com campo vazio");
+      expect(err.message).toMatch("O campo categoria precisa ser preenchido");
     }
   });
 
@@ -267,11 +235,9 @@ describe("Teste para classe livro", () => {
         -2,
         '12'
       );
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
+
     } catch (err) {
-      expect(err.message).toMatch("O preço está com valor negativo");
+      expect(err.message).toMatch("O campo preço precisa receber valores positivos");
     }
   });
 
@@ -288,14 +254,11 @@ describe("Teste para classe livro", () => {
         author,
         category,
         2,
-        '21'
+        '12'
       );
-    
-      console.log(`saved ${newBook.title}, ${newBook.resume}, ${newBook.summary}, ${newBook.numberPages}, ${newBook.isbn}, 
-         ${newBook.author.name}, ${newBook.author.email}, ${newBook.category.name}, ${newBook.price}, 
-         ${newBook.edition}`);
+
     } catch (err) {
-      expect(err.message).toMatch("O número da edição não começa com o número 1");
+      expect(err.message).toMatch("O campo edição precisa começar com o número 1");
     }  
   });
 });

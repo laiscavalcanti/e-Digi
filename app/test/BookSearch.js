@@ -37,7 +37,7 @@ try {
   bookDAO.add(book2)
   console.log({ book })
   console.log("Resultado da busca")
-  const result = bookDAO.search("Design")
+  const result = bookDAO.search(" ")
   result.forEach(book => {
     console.log(book.toString())
   })
