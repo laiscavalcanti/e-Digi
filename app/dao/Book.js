@@ -35,7 +35,7 @@ export default class BookDAO {
 
     const books = this._list.filter(e => e.title.includes(title))
     if (books.length < 1) {
-      throw new Error("Não foi encontrado")
+      return "Não foi encontrado"
     }
     return books
   }

@@ -7,7 +7,7 @@ export default class AuthorDAO {
 
   add(author) {
     if (!(author instanceof Author)) {
-      throw new Error("O objeto não é do tipo autor");
+      throw new Error("O Autor não pode ser salvo");
     }
 
     if (this._list.some((a) => a.email === author.email)) {

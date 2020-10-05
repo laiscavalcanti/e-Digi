@@ -1,59 +1,47 @@
-import Author from "../app/models/Author.js";
-import AuthorDAO from "../app/dao/Author.js";
+import Author from "../app/models/Author.js"
 
-describe("Teste para clase Autor", () => {
+describe("Teste para Author", () => {
+  it("Erro para autor vazio", () => {
+    try {
+      new Author()
+      console.log("Autor foi criado mesmo como nome nulo")
+    } catch (err) {
+      expect(err.message)
+    }
+  })
 
-  it("Autor precisa ser da instância autor", () => {
+  it("Erro para autor vazio", () => {
     try {
-      const author = undefined;
-      const authorDAO = new AuthorDAO();
-      authorDAO.add(author);
+      new Author(" ")
+      console.log("Autor criado com sucesso")
     } catch (err) {
-      expect(err.message).toMatch(
-        "O objeto não é do tipo autor"
-      );
+      expect(err.message)
     }
-  });
-  it("Autor não pode receber valor nulo", () => {
-    try {
-      const category = null;
-      const categoryDAO = new CategoryDAO();
-      categoryDAO.add(category);
-    } catch (err) {
-      expect(err.message).toMatch(
-        "O objeto não é do tipo autor"
-      );
-    }
-  });
+  })
 
-  it("Os emails não podem ser iguais", () => {
+  it("Erro para autor com email vazio", () => {
     try {
-      const authorDAO = new AuthorDAO();
-      const author1 = new Author("", "ana@gmail.com");
-      const author2 = new Author("", "anas@gmail.com");
-      authorDAO.add(author1);
-      authorDAO.add(author2);
+      new Author("Ana", "")
+      console.log("Autor criado com sucesso")
     } catch (err) {
-      expect(err.message).toMatch("O author já existe");
+      expect(err.message)
     }
-  });
-  it("O email precisa estar em um formato válido", () => {
-    try {
-      const authorDAO = new AuthorDAO();
-      const author3 = new Author("Ana", "ana.com");
-      authorDAO.add(author3);
-    } catch (err) {
-      expect(err.message).toMatch("O campo email precisa ser preenchido com um formato válido");
-    }
-  });
+  })
 
-  it("O campo nome não pode estar vazio", () => {
+  it("Erro para autor com email no formato errado", () => {
     try {
-      const authorDAO = new AuthorDAO();
-      const author2 = new Author("", "pedro@gmail.com");
-      authorDAO.add(author2);
+      new Author("Ana", "ana.com")
+      console.log("Autor criado com sucesso")
     } catch (err) {
-      expect(err.message).toMatch("O campo nome precisa ser preenchido");
+      expect(err.message)
     }
-  });
-});
+  })
+  it("Erro para autor vazio", () => {
+    try {
+      new Author("Ana", "ana@gmail.com")
+      console.log("Autor criado com sucesso")
+    } catch (err) {
+      expect(err.message)
+    }
+  })
+})
