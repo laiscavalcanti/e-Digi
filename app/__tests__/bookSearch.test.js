@@ -65,7 +65,7 @@ describe("Teste para Busca de Livro", () => {
     "12"
   )
   bookDAO.add(book)
-  it("Procurando livro que já existente", () => {
+  it("PRocurando livro que já existente", () => {
     expect(() => {
       bookDAO.search("Design UX/UI")
     })

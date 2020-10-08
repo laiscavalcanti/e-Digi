@@ -1,69 +1,53 @@
-import Author from "../app/models/Author.js"
-import AuthorDAO from "../app/dao/Author.js"
+import Author from "../models/Author.js"
+import AuthorDAO from "../dao/Author.js"
 
 describe("Teste para clase Autor", () => {
   it("Add deve lançar erro quando autor for undefided", () => {
-    try {
+    const authorDAO = new AuthorDAO()
+    expect(() => {
       const author = undefined
-      const authorDAO = new AuthorDAO()
+
       authorDAO.add(author)
-      console.log("Autor salvo com sucesso!")
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrowError(new Error(`O objeto não é do tipo autor`))
   })
   it("Add deve lançar erro quando autor for null", () => {
-    try {
+    const authorDAO = new AuthorDAO()
+    expect(() => {
       const author = null
-      const authorDAO = new AuthorDAO()
       authorDAO.add(author)
-      console.log("Autor salvo com sucesso!")
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrowError(new Error(`O objeto não é do tipo autor`))
   })
 
-  it("Os emails não podem ser iguais", () => {
-    try {
+  it("Add deve lançar erro quando houver outro autor igual já cadastrado", () => {
+    const authorDAO = new AuthorDAO()
+    expect(() => {
       const author1 = new Author("Ana", "ana@gmail.com")
       const author2 = new Author("Ana", "ana@gmail.com")
-      const authorDAO = new AuthorDAO()
       authorDAO.add(author1)
       authorDAO.add(author2)
-      console.log("O autor foi salvo com sucesso")
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrowError(new Error(`O author já existe`))
   })
 
-  it("O email precisa estar em um formato válido", () => {
-    try {
-      const author1 = new Author("Ana", "ana@.com")
-      const authorDAO = new AuthorDAO()
-      authorDAO.add(author1)
-      console.log("O autor foi salvo com sucesso")
-    } catch (err) {
-      expect(err.message)
-    }
+  it("Add deve lançar erro quando campo nome de autor estiver vazio", () => {
+    const authorDAO = new AuthorDAO()
+    expect(() => {
+      const author = new Author(" ", "ana@gmail.com")
+      authorDAO.add(author)
+    }).toThrowError(new Error(`O campo nome precisa ser preenchido`))
   })
 
-  it("O campo nome não pode estar vazio", () => {
-    try {
-      const authorDAO = new AuthorDAO()
-      const author2 = new Author(" ", "ana@gmail.com")
-      authorDAO.add(author2)
-    } catch (err) {
-      expect(err.message)
-    }
+  it("Add deve lançar erro quando campo email de autor estiver vazio", () => {
+    const authorDAO = new AuthorDAO()
+    expect(() => {
+      const author = new Author("Ana", " ")
+      authorDAO.add(author)
+    }).toThrowError(new Error(`O campo email precisa ser preenchido com um formato válido`))
   })
-  it("Os emails não podem ser iguais", () => {
-    try {
-      const author1 = new Author("Ana", "ana@gmail.com")
-      const authorDAO = new AuthorDAO()
-      authorDAO.add(author1)
-      console.log("O autor foi salvo com sucesso")
-    } catch (err) {
-      expect(err.message)
-    }
+  it("Adicionando autor com sucesso", () => {
+    const authorDAO = new AuthorDAO()
+    const author = new Author("Ana", "ana@gmail.com")
+    authorDAO.add(author)
+    console.log(`Autor cadastrado com sucesso! \nDados do Autor: \nNome: ${author.name}, Email: ${author.email}`)
+    expect(authorDAO.authors).toContainEqual(author)
   })
 })

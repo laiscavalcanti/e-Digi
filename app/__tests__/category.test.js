@@ -1,28 +1,13 @@
-import Category from "../app/models/Category.js"
+import Category from "../models/Category.js"
 
 describe("Teste para categoria", () => {
-  it("Erro para categoria com nome nulo", () => {
-    try {
-      new Category(null)
-      console.log("Erro: categoria foi criado mesmo como nome nulo")
-    } catch (err) {
-      expect(err.message)
-    }
-  })
-  it("Erro para categoria vazio", () => {
-    try {
+  it("É esperado um erro ao criar categoria sem nome", () => {
+    expect(() => {
       new Category(" ")
-      console.log("Erro: categoria foi criada com campo vazio")
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrowError(new Error(`O campo categoria precisa ser preenchido`))
   })
-  it("Cadastro de categoria", () => {
-    try {
-      new Category("Devops")
-      console.log("Categoria foi criada com sucesso!")
-    } catch (err) {
-      expect(err.message)
-    }
+  it("Adicionando categoria com sucesso", () => {
+    const category = new Category("Devops")
+    expect(category._name).toBe("Devops")
   })
 })

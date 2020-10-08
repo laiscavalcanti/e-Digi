@@ -1,29 +1,25 @@
-import Author from "../app/models/Author.js"
-import Category from "../app/models/Category.js"
-import Book from "../app/models/Book.js"
-import Cart from "../app/models/Cart.js"
-import CartItem from "../app/models/CartItem.js"
-import CartDAO from "../app/dao/Cart.js"
+import Author from "../models/Author.js"
+import Category from "../models/Category.js"
+import Book from "../models/Book.js"
+import Cart from "../models/Cart.js"
+import CartItem from "../models/CartItem.js"
+import CartDAO from "../dao/Cart.js"
 
 describe("Teste para Carrinho de Compras", () => {
   it("Add deve lançar erro quando Carro for undefided", () => {
-    try {
+    expect(() => {
       const cart = undefined
       const cartDAO = new CartDAO()
       cartDAO.add(cart)
-    } catch (err) {
-      expect(err.message).toMatch("O objeto não é do tipo Carrinho de Compras")
-    }
+    }).toThrowError(new Error("O objeto não é do tipo Carrinho de Compras"))
   })
 
   it("Add deve lançar erro quando Carro for null", () => {
-    try {
+    expect(() => {
       const cart = null
       const cartDAO = new CartDAO()
       cartDAO.add(cart)
-    } catch (err) {
-      expect(err.message).toMatch("O objeto não é do tipo Carrinho de Compras")
-    }
+    }).toThrowError(new Error("O objeto não é do tipo Carrinho de Compras"))
   })
 
   it("Itens adicionados no carrinho com sucesso", () => {

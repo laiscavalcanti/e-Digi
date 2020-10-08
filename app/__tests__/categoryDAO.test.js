@@ -1,5 +1,5 @@
-import Category from "../app/models/Category.js"
-import CategoryDAO from "../app/dao/Category.js"
+import Category from "../models/Category.js"
+import CategoryDAO from "../dao/Category.js"
 
 describe("Testes para classe Categoria", () => {
   it("Add deve lançar erro quando Categoria for undefided", () => {
