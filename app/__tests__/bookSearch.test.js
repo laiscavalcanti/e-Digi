@@ -22,7 +22,7 @@ describe("Teste para Busca de Livro", () => {
   it("É esperado um erro ao buscar por livro com campo vazio", () => {
     expect(() => {
       bookDAO.search(" ")
-    }).toThrowError(new Error(`A busca do livro precisa ter no minimo 2 letras`))
+    }).toThrow(`A busca do livro precisa ter no minimo 2 letras`)
   })
 })
 
@@ -65,7 +65,7 @@ describe("Teste para Busca de Livro", () => {
     "12"
   )
   bookDAO.add(book)
-  it("PRocurando livro que já existente", () => {
+  it("Procurando livro já existente", () => {
     expect(() => {
       bookDAO.search("Design UX/UI")
     })

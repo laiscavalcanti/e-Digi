@@ -11,7 +11,7 @@ describe("Teste para Carrinho de Compras", () => {
       const cart = undefined
       const cartDAO = new CartDAO()
       cartDAO.add(cart)
-    }).toThrowError(new Error("O objeto não é do tipo Carrinho de Compras"))
+    }).toThrow("O objeto não é do tipo Carrinho de Compras")
   })
 
   it("Add deve lançar erro quando Carro for null", () => {
@@ -19,7 +19,7 @@ describe("Teste para Carrinho de Compras", () => {
       const cart = null
       const cartDAO = new CartDAO()
       cartDAO.add(cart)
-    }).toThrowError(new Error("O objeto não é do tipo Carrinho de Compras"))
+    }).toThrow("O objeto não é do tipo Carrinho de Compras")
   })
 
   it("Itens adicionados no carrinho com sucesso", () => {

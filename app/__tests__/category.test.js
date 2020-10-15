@@ -4,10 +4,10 @@ describe("Teste para categoria", () => {
   it("É esperado um erro ao criar categoria sem nome", () => {
     expect(() => {
       new Category(" ")
-    }).toThrowError(new Error(`O campo categoria precisa ser preenchido`))
+    }).toThrow(`O campo categoria precisa ser preenchido`)
   })
-  it("Adicionando categoria com sucesso", () => {
+  it("Crindo categoria com sucesso", () => {
     const category = new Category("Devops")
-    expect(category._name).toBe("Devops")
+    expect(category.name).toBe("Devops")
   })
 })

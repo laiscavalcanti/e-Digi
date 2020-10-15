@@ -3,44 +3,43 @@ import CategoryDAO from "../dao/Category.js"
 
 describe("Testes para classe Categoria", () => {
   it("Add deve lançar erro quando Categoria for undefided", () => {
-    try {
+    const categoryDAO = new CategoryDAO()
+    expect(() => {
       const category = undefined
-      const categoryDAO = new CategoryDAO()
       categoryDAO.add(category)
-      console.log("Categoria não pode ser salva");
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrow(`O objeto não é do tipo categoria`)
   })
 
   it("Add deve lançar erro quando Categoria for null", () => {
-    try {
+    const categoryDAO = new CategoryDAO()
+    expect(() => {
       const category = null
-      const categoryDAO = new CategoryDAO()
       categoryDAO.add(category)
-      console.log("Categoria não pode ser salva");
-    } catch (err) {
-      expect(err.message)
-    }
+    }).toThrow(`O objeto não é do tipo categoria`)
   })
-  it("Categoria com nome vazio não pode ser criada", () => {
-    try {
-      new Category(" ")
-    } catch (error) {
-      expect(error.message)
-    }
+  it("Add deve lançar erro quando campo nome de categoria estiver vazio", () => {
+    const categoryDAO = new CategoryDAO()
+    expect(() => {
+      const category = new Category(" ")
+      categoryDAO.add(category)
+    }).toThrow(`O campo categoria precisa ser preenchido`)
   })
 
-  it("Categorias iguais não podem ser cadastradas", () => {
-    try {
+  it("Add deve lançar erro para quando categorias iguais forem cadastradas", () => {
+    const categoryDAO = new CategoryDAO()
+    expect(() => {
       const category = new Category("Devops")
-      const categoryDAO = new CategoryDAO()
+      const category2 = new Category("Devops")
       categoryDAO.add(category)
-      const categoria2 = new Category("Devops")
-      categoryDAO.add(categoria2)
-      console.log("sucesso: categoria salva com sucesso");
-    } catch (err) {
-      expect(err.message)
-    }
+      categoryDAO.add(category2)
+    }).toThrow(`A categoria já foi cadastrada`)
+  })
+
+  it("Criando uma categoria com sucesso", () => {
+    const categoryDAO =  new CategoryDAO()
+    const category = new Category("Devops")
+    categoryDAO.add(category)
+    console.log(`Categoria cadastrada com sucesso. Categoria: ${category.name}`)
+    expect(categoryDAO.categories).toContainEqual(category)
   })
 })

@@ -3,7 +3,6 @@ import Category from "../models/Category.js"
 import Book from "../models/Book.js"
 import Cart from "../models/Cart.js"
 import CartItem from "../models/CartItem.js"
-import CartDAO from "../dao/Cart.js"
 
 describe("Teste para Carrinho de Compras", () => {
   it("É esperado um erro ao adicionar quantidade de livros menor que 0 no carrinhos de compras", () => {
@@ -26,6 +25,6 @@ describe("Teste para Carrinho de Compras", () => {
     const cart = new Cart(cartItem)
 
     console.log(cart)
-  }).toThrowError(new Error(`A quantidade precisa ser maior que 0`));
+  }).toThrow(`A quantidade precisa ser maior que 0`);
   })
 })

@@ -1,7 +1,7 @@
-import Book from "../app/models/Book.js"
-import BookDAO from "../app/dao/Book.js"
-import Author from "../app/models/Author.js"
-import Category from "../app/models/Category.js"
+import Book from "../models/Book.js"
+import BookDAO from "../dao/Book.js"
+import Author from "../models/Author.js"
+import Category from "../models/Category.js"
 
 describe("Teste para classe livro", () => {
   it("Add deve lançar erro quando Livro for undefided", () => {
@@ -10,7 +10,7 @@ describe("Teste para classe livro", () => {
       const bookDAO = new BookDAO()
       bookDAO.add(book)
       console.log("O Autor foi salvo")
-    }).toThrowError(new Error("O Objeto não é do tipo Livro"))
+    }).toThrow("O Objeto não é do tipo Livro")
   })
 
   it("Add deve lançar erro quando Livro for nulo", () => {
@@ -19,7 +19,7 @@ describe("Teste para classe livro", () => {
       const bookDAO = new BookDAO()
       bookDAO.add(book)
       console.log("O Autor foi salvo")
-    }).toThrowError(new Error("O Objeto não é do tipo Livro"))
+    }).toThrow("O Objeto não é do tipo Livro")
   })
 
   it("ISBN e Título de livros não podem ser iguais", () => {
@@ -53,7 +53,7 @@ describe("Teste para classe livro", () => {
       )
       bookDAO.add(newBook2)
       bookDAO.add(newBook)
-    }).toThrowError()
+    }).toThrow()
   })
 
   it("Cadastro de Livros com sucesso", () => {

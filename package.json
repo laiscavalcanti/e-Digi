@@ -13,7 +13,7 @@
   },
   "jest": {
     "roots": [
-      "__tests__"
+      "app/__tests__"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
