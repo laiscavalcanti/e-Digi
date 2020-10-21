@@ -2,13 +2,31 @@
   "name": "e-digi",
   "version": "1.0.0",
   "description": "Projeto E-digi",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "jest"
+  },
+  "jest": {
+    "roots": [
+      "app/__tests__"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2"
   }
 }

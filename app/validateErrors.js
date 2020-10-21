@@ -1,15 +1,15 @@
 export default class ValidateErrors {
-  _errors = [];
+  _errors = []
 
   addError(error) {
-    this._errors.push(error);
+    this._errors.push(error)
   }
 
   hasErrors() {
-    return this._errors.length > 0;
+    return this._errors.length > 0
   }
 
   get errors() {
-    return this._errors;
+    return this._errors
   }
 }

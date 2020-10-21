@@ -17,7 +17,7 @@ try {
   console.log(err);
 }
 
-//validação de email igual
+//teste para email igual
 try {
   const authorDAO = new AuthorDAO();
   const author1 = new Author("Ana", "ana@gmail.com");
