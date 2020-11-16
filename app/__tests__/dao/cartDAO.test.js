@@ -1,9 +1,9 @@
-import Author from "../models/Author.js"
-import Category from "../models/Category.js"
-import Book from "../models/Book.js"
-import Cart from "../models/Cart.js"
-import CartItem from "../models/CartItem.js"
-import CartDAO from "../dao/Cart.js"
+import Author from "../../models/Author.js"
+import Category from "../../models/Category.js"
+import Book from "../../models/Book.js"
+import Cart from "../../models/Cart.js"
+import CartItem from "../../models/CartItem.js"
+import CartDAO from "../../dao/Cart.js"
 
 describe("Teste para Carrinho de Compras", () => {
   it("Add deve lançar erro quando Carro for undefided", () => {

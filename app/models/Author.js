@@ -1,4 +1,4 @@
-import { emailFormat, isEmpty, isNull } from "../validate.js"
+import { emailFormat, isEmpty, isNull } from "../utils/validate.js"
 
 export default class Author {
   constructor(name, email) {

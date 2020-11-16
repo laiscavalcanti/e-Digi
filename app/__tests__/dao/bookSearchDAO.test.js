@@ -1,7 +1,7 @@
-import BookDAO from "../dao/Book.js"
-import Book from "../models/Book.js"
-import Author from "../models/Author.js"
-import Category from "../models/Category.js"
+import BookDAO from "../../dao/Book.js"
+import Book from "../../models/Book.js"
+import Author from "../../models/Author.js"
+import Category from "../../models/Category.js"
 
 describe("Teste para Busca de Livro", () => {
   const bookDAO = new BookDAO()

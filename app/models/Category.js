@@ -1,4 +1,4 @@
-import { isEmpty, isNull } from "../validate.js"
+import { isEmpty, isNull } from "../utils/validate.js"
 
 export default class Category {
   constructor(name) {

@@ -1,4 +1,4 @@
-import Category from "../models/Category.js"
+import Category from "../../models/Category.js"
 
 describe("Teste para categoria", () => {
   it("É esperado um erro ao criar categoria sem nome", () => {

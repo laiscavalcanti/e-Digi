@@ -1,6 +1,6 @@
-import Book from "../models/Book.js"
-import Author from "../models/Author.js"
-import Category from "../models/Category.js"
+import Book from "../../models/Book.js"
+import Author from "../../models/Author.js"
+import Category from "../../models/Category.js"
 
 describe("Teste para Livro", () => {
   it(`É esperado um erro ao criar Livro sem título`, () => {

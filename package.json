@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Projeto E-digi",
   "author": "",
+
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "nodemon": "^2.0.4"
   },
   "scripts": {
@@ -13,7 +18,7 @@
   },
   "jest": {
     "roots": [
-      "__tests__"
+      "app/__tests__"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
