@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build: "."
+    volumes:
+      - .:/src/app
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    environment:
+      - HOST=localhost
+      - USER=root
+      - PASSWORD=root
+      - DATABASE=edigi
+
+  db:
+    container_name: db
+    image: mysql:8
+    volumes:
+      - db-data
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: edigi

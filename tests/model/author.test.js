@@ -24,12 +24,5 @@ describe("Teste para Author", () => {
     console.log("Autor criado com sucesso")
     expect(author.name).toBe("Ana")
     expect(author.email).toBe("ana@gmail.com")
-
-    /*expect().toBeCalledWith(
-        expect.objectContaining({
-          x: expect.any(Number),
-          y: expect.any(Number),
-        }),
-      );*/
   })
 })

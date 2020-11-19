@@ -3,35 +3,18 @@
   "version": "1.0.0",
   "description": "Projeto E-digi",
   "author": "",
-
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.2.5",
-    "nodemon": "^2.0.4"
+    "mysql2": "^2.2.5"
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "test": "jest"
-  },
-  "jest": {
-    "roots": [
-      "app/__tests__"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
-    ]
+    "test": "jest --config=jest.config.js"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
-    "babel-jest": "^26.3.0",
+    "babel-jest": "^26.6.3",
     "jest": "^26.4.2"
   }
 }

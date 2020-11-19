@@ -13,12 +13,11 @@ export default class AuthorDAO {
       const authors = await this._db.query(`SELECT * FROM author`)
 
       if (authors.some(a => a.email === author.email)) {
-        throw new Error("O author já existe")
+        throw new Error(`O author já existe`)
       }
-
       await this._db.query(`INSERT INTO author (name, email) VALUES (?, ?)`, [author.name, author.email])
     } catch (error) {
-     throw new Error(error)
+      throw new Error(error)
     }
   }
 }
