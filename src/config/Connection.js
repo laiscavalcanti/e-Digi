@@ -5,6 +5,16 @@ export default class Connection {
   constructor() {
     this.conn = mysql.createConnection(account)
   }
+  conect() {
+    return new Promise((resolve, reject) => {
+      this.conn.connect(err => {
+        if (err) return reject(err)
+        resolve()
+      })
+    })
+  }
+
+
 
   query(sql, args) {
     return new Promise((reoslve, reject) => {

@@ -1,10 +1,10 @@
-import "dotenv/config"
+import "dotenv/config.js"
 
 const account = {
-  host: process.env.HOST,
-  user: process.env.USERDB,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'edigi',
   multipleStatements: true,
 }
 export default account
