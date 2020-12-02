@@ -2,7 +2,7 @@ import Connection from "./Connection.js"
 
 export const database_edigi = `CREATE DATABASE IF NOT EXISTS edigi`
 
-export const table_author = `CREATE TABLE IF NOT EXISTS author(
+ const table_author = `CREATE TABLE IF NOT EXISTS author(
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(50) NOT NULL,
                 email VARCHAR(50) NOT NULL,
@@ -10,14 +10,14 @@ export const table_author = `CREATE TABLE IF NOT EXISTS author(
                 UNIQUE KEY (NAME)
               )`
 
-export const table_category = `CREATE TABLE IF NOT EXISTS category(
+const table_category = `CREATE TABLE IF NOT EXISTS category(
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(50) NOT NULL,
                 date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 UNIQUE KEY (NAME)
               )`
 
-export const table_book = `CREATE TABLE IF NOT EXISTS book(
+const table_book = `CREATE TABLE IF NOT EXISTS book(
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 category_id INTEGER NOT NULL,
                 author_id INTEGER NOT NULL,
@@ -31,7 +31,7 @@ export const table_book = `CREATE TABLE IF NOT EXISTS book(
                 FOREIGN KEY (category_id) REFERENCES category(id),
                 FOREIGN KEY (author_id) REFERENCES author(id)
               )`
-export const table_cart = `CREATE TABLE IF NOT EXISTS cart(
+ const table_cart = `CREATE TABLE IF NOT EXISTS cart(
                   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                   book_id INTEGER NOT NULL,
                   quantity INTEGER UNSIGNED NOT NULL,

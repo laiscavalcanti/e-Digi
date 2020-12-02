@@ -1,8 +1,8 @@
 import Author from "../models/Author.js"
 
 export default class AuthorDAO {
-  constructor(db) {
-    this._db = db
+  constructor(conn) {
+    this._conn = conn
   }
 
   async add(author) {
@@ -10,12 +10,12 @@ export default class AuthorDAO {
       throw new Error(`O objeto não é do tipo autor`)
     }
     try {
-      const authors = await this._db.query(`SELECT * FROM author`)
+      const authors = await this._conn.query(`SELECT * FROM author`)
 
       if (authors.some(a => a.email === author.email)) {
         throw new Error(`O author já existe`)
       }
-      await this._db.query(`INSERT INTO author (name, email) VALUES (?, ?)`, [author.name, author.email])
+      await this._conn.query(`INSERT INTO author (name, email) VALUES (?, ?)`, [author.name, author.email])
     } catch (error) {
       throw new Error(error)
     }

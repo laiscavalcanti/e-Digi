@@ -1,6 +1,6 @@
 import Author from "./Author.js"
 import Category from "./Category.js"
-import { isEmpty, isNull, maxLength, isbnFormat, editionFormat } from "../validate.js"
+import { isEmpty, isNull, maxLength, isbnFormat, editionFormat } from "../utils/validate.js"
 
 export default class Book {
   constructor(title, resume, summary, numberPages, isbn, author, category, price, edition) {

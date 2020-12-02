@@ -1,17 +1,22 @@
 import Category from "../models/Category.js"
 
 export default class CategoryDAO {
-  constructor() {
-    this._list = []
+  constructor(conn) {
+    this._conn = conn
   }
-  add(category) {
+  async add(category) {
     if (!(category instanceof Category)) {
       throw new Error("O objeto não é do tipo categoria")
     }
-
-    if (this._list.some(c => c.name === category.name)) {
-      throw new Error("A categoria já foi cadastrada")
+    try {
+      const categories = await this._conn.query(`SELECT * FROM category`)
+      
+      if (categories.some(c => c.name === category.name)) {
+        throw new Error("A categoria já foi cadastrada")
+      }
+      await this._conn.query(`INSERT INTO category (name) VALUES (?)`, [category.name])
+    } catch (error) {
+      throw new Error(error)
     }
-    this._list.push(category)
   }
 }

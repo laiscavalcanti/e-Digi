@@ -1,9 +1,14 @@
 import mysql from "mysql2"
-import account from "./db_config.js"
+//import account from "./db_config.js"
 
 export default class Connection {
   constructor() {
-    this.conn = mysql.createConnection(account)
+    this.conn = mysql.createConnection({ 
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'edigi',
+    multipleStatements: true,})
   }
   conect() {
     return new Promise((resolve, reject) => {
@@ -13,8 +18,6 @@ export default class Connection {
       })
     })
   }
-
-
 
   query(sql, args) {
     return new Promise((reoslve, reject) => {

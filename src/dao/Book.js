@@ -1,24 +1,50 @@
 import Book from "../models/Book.js"
-import { isEmpty, maxLength } from "../validate.js"
-import ValidateErrors from "../validateErrors.js"
+import { isEmpty, maxLength } from "../utils/validate.js"
+import ValidateErrors from "../utils/validateErrors.js"
 
 export default class BookDAO {
-  constructor() {
-    this._list = []
+  constructor(conn) {
+    this._conn = conn
   }
-  hasTitle(book) {
+
+ async add(book) {
+    if (!(book instanceof Book)) {
+      throw new Error(`O Objeto não é do tipo Livro`)
+    }
+    try{
+      const books = await this._conn.query(`SELECT * from book`)
+
+      if(books.some(b => b.title === book.title)){
+        throw new Error(`Já existe um cadastro de livro com esse título!`)
+      }
+      await this._conn.query(`INSERT INTO book(
+        category_id, author_id, title, 
+        resume, summary, number_of_pages,
+        isbn, edition, price) VALUES 
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [book.category_id, book.author_id,
+          book.title, book.title, book.summary, book.number_of_pages,
+          book.isbn, book.edition, book.price
+        ])
+    } catch(error){
+      throw new Error(error)
+    }
+    /*const validatedBook = this.validationBook(book)
+    if (validatedBook.hasErrors()) {
+      throw validatedBook.errors
+    }
+    this._list.push(book)*/
+  }
+  /*hasTitle(book) {
     return this._list.some(b => b.title === book.title)
   }
   hasIsbn(book) {
     return this._list.some(b => b.isbn === book.isbn)
-  }
+  }*/
 
-  validationBook(book) {
+  /*validationBook(book) {
     const validate = new ValidateErrors()
 
-    if (!(book instanceof Book)) {
-      throw new Error(`O Objeto não é do tipo Livro`)
-    }
+  
     if (this.hasTitle(book)) {
       validate.addError(new Error(`Já existe um cadastro de livro com esse título!`))
     }
@@ -26,9 +52,9 @@ export default class BookDAO {
       validate.addError(new Error(`Já existe um livro cadastrado com esse ISBN!`))
     }
     return validate
-  }
+  }*/
 
-  search(title) {
+  /*async search(title) {
     if (isEmpty(title)) {
       throw new Error("A busca do livro precisa ter no minimo 2 letras")
     }
@@ -38,13 +64,7 @@ export default class BookDAO {
       throw new Error("Não foi encontrado")
     }
     return books
-  }
+  }*/
 
-  add(book) {
-    const validatedBook = this.validationBook(book)
-    if (validatedBook.hasErrors()) {
-      throw validatedBook.errors
-    }
-    this._list.push(book)
-  }
+  
 }

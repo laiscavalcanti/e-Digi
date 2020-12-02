@@ -1,19 +1,27 @@
-import Book from "../app/models/Book.js"
-import BookDAO from "../app/dao/Book.js"
-import Author from "../app/models/Author.js"
-import Category from "../app/models/Category.js"
+import Book from "../../src/models/Book.js"
+import BookDAO from "../../src/dao/Book.js"
+import Author from "../../src/models/Author.js"
+import Category from "../../src/models/Category.js"
+import Connection from "../../src/config/Connection.js"
 
 describe("Teste para classe livro", () => {
-  it("Add deve lançar erro quando Livro for undefided", () => {
-    expect(() => {
-      const book = undefined
-      const bookDAO = new BookDAO()
-      bookDAO.add(book)
-      console.log("O Autor foi salvo")
-    }).toThrowError(new Error("O Objeto não é do tipo Livro"))
+  let conn = new Connection()
+
+  beforeAll(async () => {
+    await conn.conect()
+  });
+
+  afterAll(async () => {
+    await conn.close();
   })
 
-  it("Add deve lançar erro quando Livro for nulo", () => {
+  it("Add deve lançar erro quando livro for undefined", async () => {
+    const bookDAO = new BookDAO(conn)
+    const book = undefined
+    await expect(bookDAO.add(book)).rejects.toThrow(`O objeto não é do tipo Livro`)
+  })
+
+  /*it("Add deve lançar erro quando Livro for nulo", () => {
     expect(() => {
       const book = null
       const bookDAO = new BookDAO()
@@ -78,5 +86,5 @@ describe("Teste para classe livro", () => {
         list: bookDAO._list,
       })
       expect(bookDAO.books).toContainEqual(newBook);
-  })
+  })*/
 })
