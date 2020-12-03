@@ -3,11 +3,11 @@ import Category from "./Category.js"
 import { isEmpty, isNull, maxLength, isbnFormat, editionFormat } from "../utils/validate.js"
 
 export default class Book {
-  constructor(title, resume, summary, numberPages, isbn, author, category, price, edition) {
+  constructor(title, resume, summary, number_of_pages, isbn, author, category, price, edition) {
     this.title = title
     this.resume = resume
     this.summary = summary
-    this.numberPages = numberPages
+    this.number_of_pages = number_of_pages
     this.isbn = isbn
     this.author = author
     this.category = category
@@ -29,9 +29,9 @@ export default class Book {
     if (isEmpty(summary) || isNull(summary)) throw new Error(`O campo sumário não pode ser vazio`)
     this._summary = summary
   }
-  set numberPages(numberPages) {
-    if (numberPages < 0) throw new Error(`O campo número de páginas precisa recebr valores maiores que 0`)
-    this._numberPages = numberPages
+  set number_of_pages(number_of_pages) {
+    if (number_of_pages < 0) throw new Error(`O campo número de páginas precisa recebr valores maiores que 0`)
+    this._number_of_pages = number_of_pages
   }
   set isbn(isbn) {
     if (isEmpty(isbn) || !isbn.match(isbnFormat))
@@ -76,8 +76,8 @@ export default class Book {
   get isbn() {
     return this._isbn
   }
-  get numberPages() {
-    return this._numberPages
+  get number_of_pages() {
+    return this._number_of_pages
   }
   get summary() {
     return this._summary
@@ -94,7 +94,7 @@ export default class Book {
             Título: ${this._title}\n
             Resumo: ${this._resume}\n
             Sumário: ${this._summary}\n
-            Número de Páginas: ${this._numberPages}\n
+            Número de Páginas: ${this._number_of_pages}\n
             ISBN: ${this._isbn}
             Autor: ${this._author.name}\n
             Categoria: ${this._category.name}\n

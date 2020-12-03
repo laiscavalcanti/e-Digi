@@ -15,11 +15,32 @@ describe("Teste para classe livro", () => {
     await conn.close();
   })
 
-  it("Add deve lançar erro quando livro for undefined", async () => {
+  it("Adicionando um livro com sucesso", async () => {
     const bookDAO = new BookDAO(conn)
-    const book = undefined
+    const book = null
     await expect(bookDAO.add(book)).rejects.toThrow(`O objeto não é do tipo Livro`)
   })
+
+
+  it("Add deve lançar erro quando livro for undefined", async () => {
+    const bookDAO = new BookDAO(conn)
+    const author = new Author("Ana", "ana@gmail.com")
+    const category = new Category("Design")
+    const book = new Book(
+      "Design UX/UI",
+      "Esse livro é sobre Design UX/UI",
+      "Sumário",
+      40,
+      "978-85-13196-08-9",
+      author,
+      category,
+      12,
+      "12"
+    )
+    await bookDAO.add(book)
+    expect(book).toBeDefined()
+  })
+
 
   /*it("Add deve lançar erro quando Livro for nulo", () => {
     expect(() => {

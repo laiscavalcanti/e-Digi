@@ -11,20 +11,17 @@ export default class BookDAO {
     if (!(book instanceof Book)) {
       throw new Error(`O Objeto não é do tipo Livro`)
     }
-    try{
-      const books = await this._conn.query(`SELECT * from book`)
+    try {
+      const books = await this._conn.query(`SELECT * FROM book`)
 
       if(books.some(b => b.title === book.title)){
         throw new Error(`Já existe um cadastro de livro com esse título!`)
       }
-      await this._conn.query(`INSERT INTO book(
-        category_id, author_id, title, 
-        resume, summary, number_of_pages,
-        isbn, edition, price) VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [book.category_id, book.author_id,
-          book.title, book.title, book.summary, book.number_of_pages,
-          book.isbn, book.edition, book.price
-        ])
+      await this._conn.query(`INSERT INTO book (
+         title, resume, summary, number_of_pages,
+        isbn, author_id, category_id, edition, price) VALUES 
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [book.title, book.title, book.summary, book.number_of_pages,
+          book.isbn, book.author_id, book.category_id,  book.edition, book.price])
     } catch(error){
       throw new Error(error)
     }
