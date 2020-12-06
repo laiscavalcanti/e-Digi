@@ -1,4 +1,6 @@
 import Book from "../../src/models/Book.js"
+import AuthorDAO from "../../src/dao/Author.js"
+import CategoryDAO from "../../src/dao/Category.js"
 import BookDAO from "../../src/dao/Book.js"
 import Author from "../../src/models/Author.js"
 import Category from "../../src/models/Category.js"
@@ -15,26 +17,36 @@ describe("Teste para classe livro", () => {
     await conn.close();
   })
 
-  it("Adicionando um livro com sucesso", async () => {
+  it("Add deve lançar erro quando livro for null", async () => {
     const bookDAO = new BookDAO(conn)
     const book = null
-    await expect(bookDAO.add(book)).rejects.toThrow(`O objeto não é do tipo Livro`)
+    await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
   })
-
 
   it("Add deve lançar erro quando livro for undefined", async () => {
     const bookDAO = new BookDAO(conn)
-    const author = new Author("Ana", "ana@gmail.com")
-    const category = new Category("Design")
+    const book = undefined
+    await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
+  })
+
+
+  it("Adicionando um livro com sucesso", async () => {
+    const categoryDAO = new CategoryDAO(conn)
+    const authorDAO = new AuthorDAO(conn)
+    const bookDAO = new BookDAO(conn)
+    const author = new Author("J4543i3", "j4543i3@gmail.com")
+    const category = new Category("j4543i3")
+    await categoryDAO.add(category)
+    await authorDAO.add(author)
     const book = new Book(
+      author,
+      category,
       "Design UX/UI",
-      "Esse livro é sobre Design UX/UI",
+      "Esse livro é sobre Design",
       "Sumário",
       40,
       "978-85-13196-08-9",
-      author,
-      category,
-      12,
+      50,
       "12"
     )
     await bookDAO.add(book)

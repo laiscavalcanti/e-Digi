@@ -27,14 +27,14 @@ describe("Teste para tabela Autor", () => {
 
   it("Criando autor com sucesso", async () => {
     const authorDAO = new AuthorDAO(conn)
-    const author = new Author("Ana", "ana@gmail.com")
+    const author = new Author("Anaaa1rt2353", "anaaa1rt2533@gmail.com")
     await authorDAO.add(author)
     expect(author.email).toBeDefined()
   })
 
   it("Add deve lançar erro quando houver outro autor igual já cadastrado", async () => {
     const authorDAO = new AuthorDAO(conn)
-    const author = new Author("Ana", "ana@gmail.com")
+    const author = new Author("Anaaa12", "anaaa12@gmail.com")
     await expect(authorDAO.add(author)).rejects.toThrow(`O author já existe`)
   })
 

@@ -3,18 +3,31 @@ import Category from "./Category.js"
 import { isEmpty, isNull, maxLength, isbnFormat, editionFormat } from "../utils/validate.js"
 
 export default class Book {
-  constructor(title, resume, summary, number_of_pages, isbn, author, category, price, edition) {
+  constructor(author, category, title, resume, summary, number_of_pages, isbn, price, edition) {
+    this.author = author
+    this.category = category
     this.title = title
     this.resume = resume
     this.summary = summary
     this.number_of_pages = number_of_pages
     this.isbn = isbn
-    this.author = author
-    this.category = category
     this.price = price
     this.edition = edition
+    this.date = new Date()
   }
 
+  set author(author) {
+    if (!(author instanceof Author)) {
+      throw new Error(`O objeto não é do tipo autor`)
+    }
+    this._author = author
+  }
+  set category(category) {
+    if (!(category instanceof Category)) {
+      throw new Error(`O objeto não é do tipo categoria`)
+    }
+    this._category = category
+  }
   set title(title) {
     if (isEmpty(title) || isNull(title)) throw new Error(`O campo título precisa ser preenchido`)
     this._title = title
@@ -38,18 +51,7 @@ export default class Book {
       throw new Error(`O campo isbn precisa ser preenchido com um formato válido`)
     this._isbn = isbn
   }
-  set author(author) {
-    if (!(author instanceof Author)) {
-      throw new Error(`O objeto não é do tipo autor`)
-    }
-    this._author = author
-  }
-  set category(category) {
-    if (!(category instanceof Category)) {
-      throw new Error(`O objeto não é do tipo categoria`)
-    }
-    this._category = category
-  }
+
   set price(price) {
     if (price <= 0) throw new Error(`O campo preço precisa receber valores positivos`)
     this._price = price

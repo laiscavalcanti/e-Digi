@@ -17,11 +17,12 @@ export default class BookDAO {
       if(books.some(b => b.title === book.title)){
         throw new Error(`Já existe um cadastro de livro com esse título!`)
       }
-      await this._conn.query(`INSERT INTO book (
-         title, resume, summary, number_of_pages,
-        isbn, author_id, category_id, edition, price) VALUES 
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [book.title, book.title, book.summary, book.number_of_pages,
-          book.isbn, book.author_id, book.category_id,  book.edition, book.price])
+      const result  = await this._conn.query(`INSERT INTO book (
+        author_id, category_id, title, resume, summary, number_of_pages,
+        isbn, edition, price) VALUES 
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)`, [book.author.id, book.category.id, book.title, book.title, book.summary, book.number_of_pages,
+          book.isbn, book.edition, book.price])
+          console.log(result.insertId);
     } catch(error){
       throw new Error(error)
     }

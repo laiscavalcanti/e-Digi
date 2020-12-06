@@ -14,7 +14,9 @@ export default class CategoryDAO {
       if (categories.some(c => c.name === category.name)) {
         throw new Error("A categoria já foi cadastrada")
       }
-      await this._conn.query(`INSERT INTO category (name) VALUES (?)`, [category.name])
+      const result = await this._conn.query(`INSERT INTO category (name) VALUES (?)`, [category.name])
+      category.id = result.insertId
+      console.log(result.insertId)
     } catch (error) {
       throw new Error(error)
     }

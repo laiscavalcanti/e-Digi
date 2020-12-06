@@ -4,6 +4,7 @@ export default class CartItem {
   constructor(book, quantify) {
     this.book = book
     this.quantify = quantify
+    this.date = new Date()
   }
   set book(book) {
     if (!(book instanceof Book)) {

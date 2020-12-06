@@ -3,6 +3,7 @@ import { isEmpty, isNull } from "../utils/validate.js"
 export default class Category {
   constructor(name) {
     this.name = name
+    this.date = new Date()
   }
 
   set name(name) {

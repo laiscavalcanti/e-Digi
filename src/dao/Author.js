@@ -14,10 +14,18 @@ export default class AuthorDAO {
 
       if (authors.some(a => a.email === author.email)) {
         throw new Error(`O author já existe`)
+        
       }
-      await this._conn.query(`INSERT INTO author (name, email) VALUES (?, ?)`, [author.name, author.email])
+      const result = await this._conn.query(
+        "INSERT INTO author (name, email) VALUES (?, ?)",
+        [author.name, author.email])
+            author.id = result.insertId
+            console.log(result.insertId)
+           
     } catch (error) {
       throw new Error(error)
     }
   }
+
+
 }

@@ -2,25 +2,23 @@ import Connection from "./Connection.js"
 
 export const database_edigi = `CREATE DATABASE IF NOT EXISTS edigi`
 
- const table_author = `CREATE TABLE IF NOT EXISTS author(
+const table_author = `CREATE TABLE IF NOT EXISTS author(
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(50) NOT NULL,
-                email VARCHAR(50) NOT NULL,
-                date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE KEY (NAME)
+                email VARCHAR(50) NOT NULL UNIQUE KEY,
+                date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
               )`
 
 const table_category = `CREATE TABLE IF NOT EXISTS category(
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                name VARCHAR(50) NOT NULL,
-                date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE KEY (NAME)
+                name VARCHAR(50) NOT NULL UNIQUE KEY,
+                date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
               )`
 
-const table_book = `CREATE TABLE IF NOT EXISTS book(
+const table_book = `CREATE TABLE IF NOT EXISTS book (
                 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                category_id INTEGER NOT NULL,
                 author_id INTEGER NOT NULL,
+                category_id INTEGER NOT NULL,
                 title VARCHAR(50) NOT NULL UNIQUE KEY,
                 resume VARCHAR(500) NOT NULL,
                 summary VARCHAR(500) NOT NULL,
@@ -28,14 +26,17 @@ const table_book = `CREATE TABLE IF NOT EXISTS book(
                 isbn VARCHAR(17) NOT NULL UNIQUE KEY,
                 edition INTEGER UNSIGNED NOT NULL,
                 price FLOAT UNSIGNED NOT NULL,
-                FOREIGN KEY (category_id) REFERENCES category(id),
-                FOREIGN KEY (author_id) REFERENCES author(id)
+                time_registration TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (author_id) REFERENCES author(id),
+                FOREIGN KEY (category_id) REFERENCES category(id)
+                ON DELETE CASCADE
               )`
  const table_cart = `CREATE TABLE IF NOT EXISTS cart(
                   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
                   book_id INTEGER NOT NULL,
                   quantity INTEGER UNSIGNED NOT NULL,
                   total FLOAT UNSIGNED NOT NULL,
+                  time_registration TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   FOREIGN KEY (book_id) REFERENCES book(id)
               )`
 
