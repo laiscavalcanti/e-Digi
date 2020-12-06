@@ -34,8 +34,8 @@ describe("Teste para classe livro", () => {
     const categoryDAO = new CategoryDAO(conn)
     const authorDAO = new AuthorDAO(conn)
     const bookDAO = new BookDAO(conn)
-    const author = new Author("J4543i3", "j4543i3@gmail.com")
-    const category = new Category("j4543i3")
+    const author = new Author("Ana", "ana@gmail.com")
+    const category = new Category("Design")
     await categoryDAO.add(category)
     await authorDAO.add(author)
     const book = new Book(
