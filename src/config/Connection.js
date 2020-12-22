@@ -6,7 +6,7 @@ export default class Connection {
     this.conn = mysql.createConnection({ 
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'edigi',
     multipleStatements: true,})
   }

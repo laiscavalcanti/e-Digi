@@ -7,117 +7,153 @@ import Category from "../../src/models/Category.js"
 import Connection from "../../src/config/Connection.js"
 
 describe("Teste para classe livro", () => {
-  let conn = new Connection()
+    let conn = new Connection()
 
-  beforeAll(async () => {
-    await conn.conect()
-  });
+    beforeAll(async() => {
+        await conn.conect()
+    });
 
-  afterAll(async () => {
-    await conn.close();
-  })
+    afterAll(async() => {
+        await conn.close();
+    })
 
-  it("Add deve lançar erro quando livro for null", async () => {
-    const bookDAO = new BookDAO(conn)
-    const book = null
-    await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
-  })
+    it("Add deve lançar erro quando livro for null", async() => {
+        const bookDAO = new BookDAO(conn)
+        const book = null
+        await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
+    })
 
-  it("Add deve lançar erro quando livro for undefined", async () => {
-    const bookDAO = new BookDAO(conn)
-    const book = undefined
-    await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
-  })
-
-
-  it("Adicionando um livro com sucesso", async () => {
-    const categoryDAO = new CategoryDAO(conn)
-    const authorDAO = new AuthorDAO(conn)
-    const bookDAO = new BookDAO(conn)
-    const author = new Author("Ana", "ana@gmail.com")
-    const category = new Category("Design")
-    await categoryDAO.add(category)
-    await authorDAO.add(author)
-    const book = new Book(
-      author,
-      category,
-      "Design UX/UI",
-      "Esse livro é sobre Design",
-      "Sumário",
-      40,
-      "978-85-13196-08-9",
-      50,
-      "12"
-    )
-    await bookDAO.add(book)
-    expect(book).toBeDefined()
-  })
+    it("Add deve lançar erro quando livro for undefined", async() => {
+        const bookDAO = new BookDAO(conn)
+        const book = undefined
+        await expect(bookDAO.add(book)).rejects.toThrow(`O Objeto não é do tipo Livro`)
+    })
 
 
-  /*it("Add deve lançar erro quando Livro for nulo", () => {
-    expect(() => {
-      const book = null
-      const bookDAO = new BookDAO()
-      bookDAO.add(book)
-      console.log("O Autor foi salvo")
-    }).toThrowError(new Error("O Objeto não é do tipo Livro"))
-  })
-
-  it("ISBN e Título de livros não podem ser iguais", () => {
-    expect(() => {
-      const bookDAO = new BookDAO()
-      const author = new Author("Ana", "ana@gmail.com")
-      const category = new Category("Design")
-      const newBook = new Book(
-        "Design UX/UI",
-        "Esse livro é sobre Design UX/UI",
-        "Sumário",
-        40,
-        "978-85-13196-08-9",
+    /*it("Adicionando um livro com sucesso", async () => {
+      const categoryDAO = new CategoryDAO(conn)
+      const authorDAO = new AuthorDAO(conn)
+      const bookDAO = new BookDAO(conn)
+      const author = new Author("Anaa", "anaa@gmail.com")
+      const category = new Category("Designa")
+      await categoryDAO.add(category)
+      await authorDAO.add(author)
+      const book = new Book(
         author,
         category,
-        2,
-        "12"
-      )
-      const author2 = new Author("Ana", "ana@gmail.com")
-      const category2 = new Category("Design")
-      const newBook2 = new Book(
-        "Design UX/UI",
-        "Esse livro é sobre Design UX/UI",
+        "Design UX/UIa",
+        "Esse livro é sobre Design",
         "Sumário",
         40,
-        "978-85-13196-08-9",
-        author2,
-        category2,
-        2,
+        "978-85-23195-68-9",
+        50,
         "12"
       )
-      bookDAO.add(newBook2)
-      bookDAO.add(newBook)
-    }).toThrowError()
-  })
+      await bookDAO.add(book)
+      expect(book).toBeDefined()
+    })*/
 
-  it("Cadastro de Livros com sucesso", () => {
+    it("É esperado um erro ao ao procurar por livro ainda não cadastrado", () => {
+        expect(async() => {
+            const bookDAO = new BookDAO(conn)
+            expect(async() => {
+                await bookDAO.search(" ")
+            }).rejects.toThrow(`A busca do livro precisa ter no minimo 2 letras`)
+        })
 
-      const bookDAO = new BookDAO()
-      const author = new Author("Pedro", "pedro@gmail.com")
-      const category = new Category("Design Patterns")
-      const newBook = new Book(
-        "Design Patterns",
-        "Esse livro é sobre Design Patterns",
-        "Sumário",
-        40,
-        "978-85-13196-08-9",
-        author,
-        category,
-        2,
-        "12"
-      )
-      
-      bookDAO.add(newBook)
-      console.log({
-        list: bookDAO._list,
-      })
-      expect(bookDAO.books).toContainEqual(newBook);
-  })*/
+
+        it("É esperado um erro ao ao procurar por livro ainda não cadastrado", async() => {
+            expect(async() => {
+                const categoryDAO = new CategoryDAO(conn)
+                const authorDAO = new AuthorDAO(conn)
+                const bookDAO = new BookDAO(conn)
+                const author = new Author("Anaaa124346", "anaaa31426@gmail.com")
+                const category = new Category("Designaa416234")
+                await categoryDAO.add(category)
+                await authorDAO.add(author)
+                const book = new Book(
+                    author,
+                    category,
+                    "Design UX/UIaa23647",
+                    "Esse livro é sobre Design",
+                    "Sumário",
+                    40,
+                    "978-85-23197-53-5",
+                    50,
+                    "12"
+                )
+                await bookDAO.add(book)
+                await bookDAO.search("Design")
+            }).rejects.toThrow(`Não foi encontrado`)
+        })
+    })
+
+
+
+    /*it("Add deve lançar erro quando Livro for nulo", () => {
+      expect(() => {
+        const book = null
+        const bookDAO = new BookDAO()
+        bookDAO.add(book)
+        console.log("O Autor foi salvo")
+      }).toThrowError(new Error("O Objeto não é do tipo Livro"))
+    })
+
+    it("ISBN e Título de livros não podem ser iguais", () => {
+      expect(() => {
+        const bookDAO = new BookDAO()
+        const author = new Author("Ana", "ana@gmail.com")
+        const category = new Category("Design")
+        const newBook = new Book(
+          "Design UX/UI",
+          "Esse livro é sobre Design UX/UI",
+          "Sumário",
+          40,
+          "978-85-13196-08-9",
+          author,
+          category,
+          2,
+          "12"
+        )
+        const author2 = new Author("Ana", "ana@gmail.com")
+        const category2 = new Category("Design")
+        const newBook2 = new Book(
+          "Design UX/UI",
+          "Esse livro é sobre Design UX/UI",
+          "Sumário",
+          40,
+          "978-85-13196-08-9",
+          author2,
+          category2,
+          2,
+          "12"
+        )
+        bookDAO.add(newBook2)
+        bookDAO.add(newBook)
+      }).toThrowError()
+    })
+
+    it("Cadastro de Livros com sucesso", () => {
+
+        const bookDAO = new BookDAO()
+        const author = new Author("Pedro", "pedro@gmail.com")
+        const category = new Category("Design Patterns")
+        const newBook = new Book(
+          "Design Patterns",
+          "Esse livro é sobre Design Patterns",
+          "Sumário",
+          40,
+          "978-85-13196-08-9",
+          author,
+          category,
+          2,
+          "12"
+        )
+        
+        bookDAO.add(newBook)
+        console.log({
+          list: bookDAO._list,
+        })
+        expect(bookDAO.books).toContainEqual(newBook);
+    })*/
 })
